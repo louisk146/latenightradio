@@ -4,17 +4,24 @@
             <div class="wrapper_wide">
             <a href='index.html' id="logo">Late Night Radio</a>
             <nav>
+
                <ul>
+               <% unless channel_signed_in? %>
                     <li><a href="#">Explore</a></li>
-                    <li><a href="#">Sign in</a></li>
-                    <li><a href="#">Make a show</a></li>
+                    <li><%= link_to "sign in", new_channel_session_path %></li>
+                    <li><%= link_to "Make a channel", new_channel_registration_path %></li>
+                <% else %>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Explore</a></li>
+                    <li><%= link_to "Sign Out", destroy_channel_session_path, method: :delete %></li>
+                <% end %>
                 </ul>
             </nav>
             </div>
         </header>
         <div class="wrapper_skinny">
         <h1>This is Late Night Radio</h1>
-    <a href="#" class="button button_highlight">Contribute</a>
+    <%= link_to "Contribute", new_channel_registration_path, class: "button button_highlight" %>
     <a href="#" class="button button_white">Listen</a>
     </div>
   </div>
